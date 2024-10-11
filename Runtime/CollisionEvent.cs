@@ -77,6 +77,70 @@ public class CollisionEvent : MonoBehaviour //This should really not be a script
         if (col.transform.GetComponent(type))
             unityEvent.Invoke(col);
     }
+
+    #region 3D
+    private void OnTriggerEnter(Collider other)
+    {
+        HandleEvent(onTriggerEnter, other.gameObject);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        HandleEvent(onTriggerStay, other.gameObject);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        HandleEvent(onTriggerExit, other.gameObject);
+    }
+
+    private void OnCollisionEnter(Collision col)
+    {
+        HandleEvent(onCollisionEnter, col.gameObject);
+    }
+
+    private void OnCollisionStay(Collision col)
+    {
+        HandleEvent(onCollisionStay, col.gameObject);
+    }
+
+    private void OnCollisionExit(Collision col)
+    {
+        HandleEvent(onCollisionExit, col.gameObject);
+    }
+    #endregion
+
+    #region 2D
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        HandleEvent(onTriggerEnter, other.gameObject);
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        HandleEvent(onTriggerStay, other.gameObject);
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        HandleEvent(onTriggerExit, other.gameObject);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        HandleEvent(onCollisionEnter, other.gameObject);
+    }
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        HandleEvent(onCollisionStay, other.gameObject);
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        HandleEvent(onCollisionExit, other.gameObject);
+    }
+
+    #endregion
 }
 
 #if UNITY_EDITOR
