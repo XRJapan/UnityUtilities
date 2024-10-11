@@ -15,7 +15,14 @@ public class CollisionEventManager : MonoBehaviour
 
     void Reset()
     {
-        events.Add(ScriptableObject.CreateInstance<CollisionEvent>());
+        AddNewEvent();
+    }
+
+    public void AddNewEvent()
+    {
+        var collisionEvent = gameObject.AddComponent<CollisionEvent>();
+        collisionEvent.hideFlags = HideFlags.HideInInspector;
+        events.Add(collisionEvent);
     }
 
     #region 3D
@@ -134,7 +141,7 @@ public class CollisionEventManagerEditor : Editor
         if (manager == null) manager = (CollisionEventManager)target;
         GUI.color = Color.green;
         if (GUILayout.Button("Add event"))
-            manager.events.Add(CreateInstance<CollisionEvent>());
+            manager.AddNewEvent();
         GUI.color = Color.white;
 
         for (int i = 0; i < manager.events.Count; i++)
@@ -166,7 +173,7 @@ public class CollisionEventManagerEditor : Editor
 
     private void RemoveEvent(CollisionEvent collision3DEvent)
     {
-        garbageCollector.AddListener(delegate { manager.events.Remove(collision3DEvent); });
+        garbageCollector.AddListener(() => manager.events.Remove(collision3DEvent));
     }
 }
 #endif

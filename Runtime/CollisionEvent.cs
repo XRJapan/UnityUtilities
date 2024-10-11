@@ -11,7 +11,7 @@ using UnityEngine.Events;
 
 
 [Serializable]
-public class CollisionEvent : ScriptableObject //This should really not be a scriptable object
+public class CollisionEvent : MonoBehaviour //This should really not be a scriptable object
 {
     public enum CollisionTypes { Tag, Script, Name, Object }
     private Type type;
@@ -21,16 +21,17 @@ public class CollisionEvent : ScriptableObject //This should really not be a scr
     [HideInInspector] public string objectName = "";
     [HideInInspector] public GameObject targetObject;
     [HideInInspector] public bool activateWithAnything = false;
+    [HideInInspector] public bool showStayEvents;
 
-    public UltEvent onTriggerEnter = new();
-    public UltEvent onTriggerStay = new();
-    public UltEvent onTriggerExit = new();
+    public UltEvent<GameObject> onTriggerEnter = new();
+    public UltEvent<GameObject> onTriggerStay = new();
+    public UltEvent<GameObject> onTriggerExit = new();
 
-    public UltEvent onCollisionEnter = new();
-    public UltEvent onCollisionStay = new();
-    public UltEvent onCollisionExit = new();
+    public UltEvent<GameObject> onCollisionEnter = new();
+    public UltEvent<GameObject> onCollisionStay = new();
+    public UltEvent<GameObject> onCollisionExit = new();
 
-    public void HandleEvent(UltEvent unityEvent, GameObject col)
+    public void HandleEvent(UltEvent<GameObject> unityEvent, GameObject col)
     {
         //No functions anyway
         if (unityEvent == null)
@@ -39,7 +40,7 @@ public class CollisionEvent : ScriptableObject //This should really not be a scr
         //Always activate if true
         if (activateWithAnything)
         {
-            unityEvent.Invoke();
+            unityEvent.Invoke(col);
             return;
         }
 
@@ -48,7 +49,7 @@ public class CollisionEvent : ScriptableObject //This should really not be a scr
             case CollisionTypes.Tag:
                 try
                 {
-                    if (col.CompareTag(tagName)) unityEvent.Invoke();
+                    if (col.CompareTag(tagName)) unityEvent.Invoke(col);
                 }
                 catch (Exception e)
                 {
@@ -60,21 +61,21 @@ public class CollisionEvent : ScriptableObject //This should really not be a scr
                 InvokeByType(unityEvent, col);
                 break;
             case CollisionTypes.Name:
-                if (col.name == objectName) unityEvent.Invoke();
+                if (col.name == objectName) unityEvent.Invoke(col);
                 break;
             case CollisionTypes.Object:
-                if (col.gameObject == targetObject) unityEvent.Invoke();
+                if (col.gameObject == targetObject) unityEvent.Invoke(col);
                 break;
         }
     }
 
-    private void InvokeByType(UltEvent unityEvent, GameObject col)
+    private void InvokeByType(UltEvent<GameObject> unityEvent, GameObject col)
     {
         if (type == null && typeName != null)
             type = Type.GetType(typeName);
 
         if (col.transform.GetComponent(type))
-            unityEvent.Invoke();
+            unityEvent.Invoke(col);
     }
 }
 

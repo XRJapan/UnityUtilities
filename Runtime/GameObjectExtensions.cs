@@ -4,7 +4,7 @@ using Object = UnityEngine.Object;
 
 namespace Utility
 {
-    public static class GameObjectExtensions
+    public static partial class GameObjectExtensions
     {
         ///<summary>Adds a component if it is missing</summary>
         public static Component GetAddComponent(this GameObject gameObject, Type type)
