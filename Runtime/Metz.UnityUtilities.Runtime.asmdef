@@ -2,7 +2,7 @@
     "name": "Metz.UnityUtilities.Runtime",
     "rootNamespace": "Utilities.Runtime",
     "references": [
-        "GUID:e51ce130d30a84d4bb4db355d8885560"
+        "Kybernetik.UltEvents"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -10,7 +10,15 @@
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [],
+    "defineConstraints": [
+        "ULTEVENTS"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.kybernetik.ultevents",
+            "expression": "0",
+            "define": "ULTEVENTS"
+        }
+    ],
     "noEngineReferences": false
 }
