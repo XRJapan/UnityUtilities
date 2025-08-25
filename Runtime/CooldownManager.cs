@@ -127,6 +127,9 @@ public static class CooldownManager
 
         public void StopCoroutine()
         {
+            if (mono == null) 
+                return;
+
             mono.StopCoroutine(Coroutine);
         }
 
