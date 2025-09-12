@@ -240,21 +240,21 @@ public class SceneReferencePropertyDrawer : PropertyDrawer
         // Missing from build scenes
         if (buildScene.buildIndex == -1)
         {
-            iconContent = EditorGUIUtility.IconContent("d_winbtn_mac_close");
+            iconContent = EditorGUIUtility.IconContent("d_winbtn_mac_close_a");
             labelContent.text = "NOT In Build";
             labelContent.tooltip = "This scene is NOT in build settings.\nIt will be NOT included in builds.";
         }
         // In build scenes and enabled
         else if (buildScene.scene.enabled)
         {
-            iconContent = EditorGUIUtility.IconContent("d_winbtn_mac_max");
+            iconContent = EditorGUIUtility.IconContent("d_completed_task");
             labelContent.text = "BuildIndex: " + buildScene.buildIndex;
             labelContent.tooltip = "This scene is in build settings and ENABLED.\nIt will be included in builds." + readOnlyWarning;
         }
         // In build scenes and disabled
         else
         {
-            iconContent = EditorGUIUtility.IconContent("d_winbtn_mac_min");
+            iconContent = EditorGUIUtility.IconContent("d_winbtn_mac_min_a");
             labelContent.text = "BuildIndex: " + buildScene.buildIndex;
             labelContent.tooltip = "This scene is in build settings and DISABLED.\nIt will be NOT included in builds.";
         }
