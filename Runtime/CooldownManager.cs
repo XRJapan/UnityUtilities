@@ -12,7 +12,7 @@ public static class CooldownManager
     private static Dictionary<string, Coroutine> coroutines = new Dictionary<string, Coroutine>();
 
     //TO SUPPORT DOMAIN RELOADING WHEN DISABLED
-    [RuntimeInitializeOnLoadMethod]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     static void Init()
     {
         GameObject obj = new GameObject("Cooldown Manager");
