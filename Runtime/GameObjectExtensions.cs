@@ -38,7 +38,7 @@ namespace Utility
         public static void DestroyChildren(this GameObject gameObject)
         {
             Transform transform = gameObject.transform;
-            for (int i = transform.childCount; i >= 0; i--)
+            for (int i = transform.childCount - 1; i >= 0; i--)
             {
                 GameObject destroyTarget = transform.GetChild(i).gameObject;
                 if (Application.IsPlaying(gameObject))
