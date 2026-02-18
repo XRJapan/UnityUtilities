@@ -39,7 +39,11 @@ namespace Utility
         {
             for (int i = 0; i < gameObject.transform.childCount; i++)
             {
-                Object.Destroy(gameObject.transform.GetChild(i).gameObject);
+                GameObject destroyTarget = gameObject.transform.GetChild(i).gameObject;
+                if (Application.IsPlaying(gameObject))
+                    Object.Destroy(destroyTarget);
+                else
+                    Object.DestroyImmediate(destroyTarget);
             }
         }
     }
