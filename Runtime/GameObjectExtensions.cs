@@ -34,5 +34,13 @@ namespace Utility
                 Object.Destroy(component);
             }
         }
+
+        public static void DestroyChildren(this GameObject gameObject)
+        {
+            for (int i = 0; i < gameObject.transform.childCount; i++)
+            {
+                Object.Destroy(gameObject.transform.GetChild(i).gameObject);
+            }
+        }
     }
 }
